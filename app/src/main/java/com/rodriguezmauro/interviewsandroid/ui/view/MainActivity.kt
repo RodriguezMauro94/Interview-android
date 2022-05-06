@@ -1,10 +1,11 @@
-package com.rodriguezmauro.interviewsandroid.view
+package com.rodriguezmauro.interviewsandroid.ui.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import com.rodriguezmauro.interviewsandroid.databinding.ActivityMainBinding
-import com.rodriguezmauro.interviewsandroid.viewmodel.QuoteViewModel
+import com.rodriguezmauro.interviewsandroid.ui.viewmodel.QuoteViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -13,17 +14,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root) // importante
+        setContentView(binding.root)
 
-        // observer para obtener cambios en el livedata del viewmodel
+        quoteViewModel.onCreate()
+
         quoteViewModel.quoteModel.observe(this) {
             binding.tvQuote.text = it.quote
             binding.tvAuthor.text = it.author
         }
+        quoteViewModel.isLoading.observe(this) {
+            binding.progress.isVisible = it
+        }
 
-        // Evento de lógica del viewModel que vá al model e impacta en el LiveData
         binding.viewContainer.setOnClickListener {
             quoteViewModel.randomQuote()
         }
