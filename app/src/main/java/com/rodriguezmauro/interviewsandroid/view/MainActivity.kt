@@ -3,7 +3,6 @@ package com.rodriguezmauro.interviewsandroid.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.rodriguezmauro.interviewsandroid.R
 import com.rodriguezmauro.interviewsandroid.databinding.ActivityMainBinding
 import com.rodriguezmauro.interviewsandroid.viewmodel.QuoteViewModel
 
