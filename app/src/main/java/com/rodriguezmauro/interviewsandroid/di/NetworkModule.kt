@@ -13,7 +13,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class) // Nivel aplicación
 object NetworkModule {
 
-    @Singleton // única instancia
+    @Singleton
     @Provides
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
     .baseUrl("https://type.fit/api/")

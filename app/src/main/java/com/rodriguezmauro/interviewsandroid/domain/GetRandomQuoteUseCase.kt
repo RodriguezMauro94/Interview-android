@@ -1,14 +1,14 @@
 package com.rodriguezmauro.interviewsandroid.domain
 
-import com.rodriguezmauro.interviewsandroid.data.model.QuoteModel
-import com.rodriguezmauro.interviewsandroid.data.model.QuoteProvider
+import com.rodriguezmauro.interviewsandroid.data.QuoteRepository
+import com.rodriguezmauro.interviewsandroid.domain.model.Quote
 import javax.inject.Inject
 
 class GetRandomQuoteUseCase @Inject constructor(
-    private val quoteProvider: QuoteProvider
+    private val repository: QuoteRepository
 ) {
-    operator fun invoke(): QuoteModel? {
-        val quotes = quoteProvider.quotes
+    suspend operator fun invoke(): Quote? {
+        val quotes = repository.getAllQuotesFromDatabase()
         if (!quotes.isNullOrEmpty()) {
             return quotes.random()
         }
